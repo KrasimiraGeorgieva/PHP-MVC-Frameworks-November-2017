@@ -20,7 +20,13 @@ The Controller most probably is a class e.g. **UsersController**, the Action is 
 
 ### 3. **Dispatching**
 
-We can map to **classes, method calls** and **argument passing**.
+Dispatcheing the user request to the relevant methods. We can map to **classes, method calls** and **argument passing**.
+
+**Result:
+
+**localhost/Scripting/users/hello/john/smith**
+
+**Hello Mr/Ms john smith**
 
 ### 4. **Error Page**
 
