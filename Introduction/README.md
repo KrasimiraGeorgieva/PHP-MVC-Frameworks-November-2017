@@ -22,7 +22,7 @@ The Controller most probably is a class e.g. **UsersController**, the Action is 
 
 Dispatcheing the user request to the relevant methods. We can map to **classes, method calls** and **argument passing**.
 
-** Result:
+* Result:
 
 **localhost/Scripting/users/hello/john/smith**
 
