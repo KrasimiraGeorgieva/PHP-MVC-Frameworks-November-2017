@@ -38,6 +38,11 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var string
+     */
+    private $confirm;
+
+    /**
      * @var ArrayCollection|Article[]
      *
      * @ORM\OneToMany(targetEntity="SoftUniBlogBundle\Entity\Article", mappedBy="author")
@@ -51,6 +56,18 @@ class User implements UserInterface
      */
     private $fullName;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="SoftUniBlogBundle\Entity\Role")
+     * @ORM\JoinTable(
+     *     name="users_roles",
+     *     joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@ORM\JoinColumn(name="role_id", referencedColumnName="id")}
+     *     )
+     */
+    private $roles;
+
 
     /**
      * User constructor.
@@ -58,6 +75,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->roles = new ArrayCollection();
     }
 
 
@@ -156,12 +174,27 @@ class User implements UserInterface
      * Alternatively, the roles might be stored on a ``roles`` property,
      * and populated in any number of different ways when the user object
      * is created.
-     *
-     * @return (Role|string)[] The user roles
+     * @return array (Role|string)[] The user roles
      */
     public function getRoles()
     {
-        return ['ROLE_USER'];
+
+        $stringRoles = [];
+        foreach ($this->roles as $role) {
+            /** @var $role Role */
+            $stringRoles[] = $role->getReachableRoles();
+        }
+        return $stringRoles;
+    }
+
+    /**
+     * @param Role $role
+     * @return User
+     */
+    public function addRole(Role $role)
+    {
+        $this->roles[] = $role;
+        return $this;
     }
 
     /**
@@ -214,6 +247,22 @@ class User implements UserInterface
     {
         $this->articles[] = $article;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConfirm()
+    {
+        return $this->confirm;
+    }
+
+    /**
+     * @param string $confirm
+     */
+    public function setConfirm($confirm)
+    {
+        $this->confirm = $confirm;
     }
 
 

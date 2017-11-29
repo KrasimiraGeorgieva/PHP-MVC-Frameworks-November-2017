@@ -7,7 +7,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use SoftUniBlogBundle\Entity\User;
 use SoftUniBlogBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
+use SoftUniBlogBundle\Entity\Role;
 
 class UsersController extends Controller
 {
@@ -23,9 +25,18 @@ class UsersController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
+//        if ($user->getPassword() != $user->getConfirm()){
+//            $form->addError(new FormError("Password mismatch"));
+//            return $this->render('default/register.html.twig', ['form' => $form->createView()]);
+//        }
+        if ($form->isSubmitted()&& $form->isValid()) {
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
+
+            $roleRepository = $this->getDoctrine()->getRepository(Role::class);
+            $userRole = $roleRepository->findOneBy(['name' => 'ROLE_USER']);
+
+            $user->addRole($userRole);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -34,8 +45,9 @@ class UsersController extends Controller
         }
         return $this->render(
             'default/register.html.twig',
-            array('form' => $form->createView()));
-        //return $this->render("default/register.html.twig");
+            array('form' => $form->createView())
+        );
+
     }
 
     /**

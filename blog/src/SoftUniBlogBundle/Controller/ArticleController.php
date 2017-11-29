@@ -40,6 +40,19 @@ class ArticleController extends Controller
 
     }
 
+//    /**
+//     * @Route("/articles", name="all_articles")
+//     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+//     * @return \Symfony\Component\HttpFoundation\Response
+//     */
+//    public function viewAll()
+//    {
+//        $articleRepository = $this->getDoctrine()->getRepository(Article::class);
+//
+//        $articles = $articleRepository->findAll();
+//
+//        return $this->render("article/view_all.html.twig", ['articles' => $articles]);
+//    }
 
     /**
      * @Route("/article/{id}", name="article_view")
@@ -50,6 +63,10 @@ class ArticleController extends Controller
     public function viewArticle($id)
     {
         $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+
+        if ($article === null){
+            return $this->redirectToRoute("blog_index");
+        }
 
         return $this->render('article/article.html.twig', ['article' => $article]);
     }
@@ -70,8 +87,47 @@ class ArticleController extends Controller
             return $this->redirectToRoute("blog_index");
         }
 
-        $form = $this->createForm(Article::class, $article);
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
+
+            return $this->redirectToRoute('article_view', ['id' => $article->getId()]);
+        }
 
         return $this->render('article/edit.html.twig', array('article' => $article, 'form' => $form->createView()));
+    }
+
+    /**
+     * @Route("/article/delete/{id}", name="article_delete")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     *
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction($id, Request $request)
+    {
+        $article = $this->getDoctrine()->getRepository(Article::class)->find($id);
+
+        if ($article === null){
+            return $this->redirectToRoute("blog_index");
+        }
+
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isValid()){
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($article);
+            $em->flush();
+
+            return $this->redirectToRoute('blog_index');
+        }
+
+        return $this->render('article/delete.html.twig', array('article' => $article, 'form' => $form->createView()));
     }
 }
