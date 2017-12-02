@@ -1,4 +1,8 @@
-.checkout
-=========
+## Blog: REST Controllers, Routing, JSON Responses
+==================================================
 
-A Symfony project created on November 26, 2017, 10:44 pm.
+### Install serialization bundle
+1. Install the Bundle
+2. Activate the Bundle
+### Create new Symfony Bundle for our REST Constrollers
+### Create ArticleController in the new bundle.
