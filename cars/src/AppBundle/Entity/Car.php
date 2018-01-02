@@ -135,5 +135,15 @@ class Car
     {
         return $this->travelledDistance;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPart()
+    {
+        return $this->part;
+    }
+
+
 }
 

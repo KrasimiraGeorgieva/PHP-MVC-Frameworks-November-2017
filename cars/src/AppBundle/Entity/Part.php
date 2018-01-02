@@ -30,7 +30,7 @@ class Part
     private $name;
 
     /**
-     * @var string
+     * @var double
      *
      * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
      */
@@ -100,7 +100,7 @@ class Part
     /**
      * Set price
      *
-     * @param string $price
+     * @param double $price
      *
      * @return Part
      */
@@ -114,7 +114,7 @@ class Part
     /**
      * Get price
      *
-     * @return string
+     * @return double
      */
     public function getPrice()
     {
@@ -159,6 +159,14 @@ class Part
     public function setSupplier(Supplier $supplier)
     {
         $this->supplier = $supplier;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getCar()
+    {
+        return $this->car;
     }
 
 }
