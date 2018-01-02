@@ -5,7 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Car;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Car controller.
@@ -25,7 +26,6 @@ class CarController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $cars = $em->getRepository('AppBundle:Car')->findAll();
-
         return $this->render('car/index.html.twig', array(
             'cars' => $cars,
         ));
@@ -36,6 +36,8 @@ class CarController extends Controller
      *
      * @Route("/new", name="car_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -62,6 +64,8 @@ class CarController extends Controller
      *
      * @Route("/{id}", name="car_show")
      * @Method("GET")
+     * @param Car $car
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Car $car)
     {
@@ -103,6 +107,9 @@ class CarController extends Controller
      *
      * @Route("/{id}", name="car_delete")
      * @Method("DELETE")
+     * @param Request $request
+     * @param Car $car
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, Car $car)
     {

@@ -36,6 +36,8 @@ class SupplierController extends Controller
      *
      * @Route("/new", name="supplier_new")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function newAction(Request $request)
     {
@@ -62,6 +64,8 @@ class SupplierController extends Controller
      *
      * @Route("/{id}", name="supplier_show")
      * @Method("GET")
+     * @param Supplier $supplier
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showAction(Supplier $supplier)
     {
@@ -78,6 +82,9 @@ class SupplierController extends Controller
      *
      * @Route("/{id}/edit", name="supplier_edit")
      * @Method({"GET", "POST"})
+     * @param Request $request
+     * @param Supplier $supplier
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function editAction(Request $request, Supplier $supplier)
     {
@@ -103,6 +110,9 @@ class SupplierController extends Controller
      *
      * @Route("/{id}", name="supplier_delete")
      * @Method("DELETE")
+     * @param Request $request
+     * @param Supplier $supplier
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Request $request, Supplier $supplier)
     {
