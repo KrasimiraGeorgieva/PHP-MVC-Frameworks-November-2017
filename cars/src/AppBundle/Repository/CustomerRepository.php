@@ -10,5 +10,12 @@ namespace AppBundle\Repository;
  */
 class CustomerRepository extends \Doctrine\ORM\EntityRepository
 {
-
+    function getAllCustomersByGivenOrder(string $order)
+    {
+        return $this->createQueryBuilder('customer')
+            ->orderBy('customer.birthDate', ':order')
+            ->setParameter('order', $order)
+            ->getQuery()
+            ->getResult();
+    }
 }
