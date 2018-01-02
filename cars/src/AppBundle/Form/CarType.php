@@ -13,7 +13,10 @@ class CarType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('make')->add('model')->add('travelledDistance')->add('part');
+        $builder
+            ->add('make')
+            ->add('model')
+            ->add('travelledDistance');
     }
     
     /**
@@ -29,7 +32,7 @@ class CarType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getName()
     {
         return 'appbundle_car';
     }

@@ -3,6 +3,7 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,7 @@ class SaleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('discount')->add('car')->add('customer');
+        $builder->add('discount', PercentType::class, ['label' => 'Discount']);
     }
     
     /**
@@ -29,7 +30,7 @@ class SaleType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getBlockPrefix()
+    public function getName()
     {
         return 'appbundle_sale';
     }
