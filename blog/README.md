@@ -1,3 +1,5 @@
 ## Blog: PHP and Symfony
 
-A Blog application creating with the Symfony Framework. Start from setting up the framework through authentication module, ending up with creating a CRUD around Doctrine entities, Roles Implementing and Validations.
+# A **Blog** application creating with the Symfony Framework.
+
+Start from setting up the framework through authentication module, ending up with creating a **CRUD** around Doctrine entities, Roles Implementing and Validations.
