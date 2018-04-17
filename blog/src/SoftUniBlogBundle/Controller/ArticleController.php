@@ -36,23 +36,9 @@ class ArticleController extends Controller
             return $this->redirectToRoute('blog_index');
         }
 
-        return $this->render('article/create.html.twig', array('form'=> $form->createView()));
+        return $this->render('article/create.html.twig', ['form'=> $form->createView()]);
 
     }
-
-//    /**
-//     * @Route("/articles", name="all_articles")
-//     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-//     * @return \Symfony\Component\HttpFoundation\Response
-//     */
-//    public function viewAll()
-//    {
-//        $articleRepository = $this->getDoctrine()->getRepository(Article::class);
-//
-//        $articles = $articleRepository->findAll();
-//
-//        return $this->render("article/view_all.html.twig", ['articles' => $articles]);
-//    }
 
     /**
      * @Route("/article/{id}", name="article_view")
@@ -104,7 +90,7 @@ class ArticleController extends Controller
             return $this->redirectToRoute('article_view', ['id' => $article->getId()]);
         }
 
-        return $this->render('article/edit.html.twig', array('article' => $article, 'form' => $form->createView()));
+        return $this->render('article/edit.html.twig', ['article' => $article, 'form' => $form->createView()]);
     }
 
     /**
@@ -140,6 +126,6 @@ class ArticleController extends Controller
             return $this->redirectToRoute('blog_index');
         }
 
-        return $this->render('article/delete.html.twig', array('article' => $article, 'form' => $form->createView()));
+        return $this->render('article/delete.html.twig', ['article' => $article, 'form' => $form->createView()]);
     }
 }

@@ -25,11 +25,12 @@ class UsersController extends Controller
 
         $form->handleRequest($request);
 
-//        if ($user->getPassword() != $user->getConfirm()){
-//            $form->addError(new FormError("Password mismatch"));
-//            return $this->render('default/register.html.twig', ['form' => $form->createView()]);
-//        }
-        if ($form->isSubmitted()&& $form->isValid()) {
+        if ($user->getPassword() != $user->getConfirm()) {
+            $form->addError(new FormError("Password mismatch"));
+            return $this->render('default/register.html.twig', ['form' => $form->createView()]);
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $password = $this->get('security.password_encoder')->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
@@ -47,7 +48,6 @@ class UsersController extends Controller
             'default/register.html.twig',
             array('form' => $form->createView())
         );
-
     }
 
     /**
@@ -57,6 +57,6 @@ class UsersController extends Controller
     public function profileAction()
     {
         $user = $this->getUser();
-        return $this->render("user/profile.html.twig", ['user'=>$user]);
+        return $this->render("user/profile.html.twig", ['user' => $user]);
     }
 }
