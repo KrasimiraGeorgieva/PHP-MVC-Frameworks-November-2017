@@ -12,11 +12,31 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Dumping database structure for blog
-CREATE DATABASE IF NOT EXISTS `blog` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `blog`;
+-- Dumping database structure for kras3eij_blog
+CREATE DATABASE IF NOT EXISTS `kras3eij_blog` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `kras3eij_blog`;
 
--- Dumping structure for table blog.articles
+-- Dumping structure for table kras3eij_blog.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `full_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_1483A5E9E7927C74` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Dumping data for table kras3eij_blog.users: ~7 rows (approximately)
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` (`id`, `email`, `password`, `full_name`) VALUES
+	(1, 'minka@abv.bg', '$2y$13$X/A4fCJzR4rnmqC5uV8qJOdrvLwqqXFjFe0Al.fgv3zoSi1zoZ1fe', 'Minka Dobreva'),
+	(2, 'gosho@abv.bg', '$2y$13$BNtuYFKPJ17ls7pycBE8PuC6/4L3N6S2NXframhx7ROPIskNQQ4A.', 'Gosho Goshov'),
+	(3, 'pesho@abv.bg', '$2y$13$IPTl9dGv4c4flUy1kw3e9O5MBykO.GmfM9KVXho7jCnC1pkp.VpRm', 'Pesho Petrov'),
+	(4, 'abv@gmail.bg', '$2y$13$U3WXtp/wBNLCzv.Wlhcl1eAwbHxu3pV5wQ4mfM.KwMfCDn08EXW4y', 'ABV ABV'),
+	(5, 'mmm@mm.mm', '$2y$13$OPk29O0he/TlkVTtJhF3uOLCqhIJY5nuzN4nUHjO6VT4jVX7Ah0OK', 'asas');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+
+-- Dumping structure for table kras3eij_blog.articles
 CREATE TABLE IF NOT EXISTS `articles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `author_id` int(11) NOT NULL,
@@ -29,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
   CONSTRAINT `FKe02fs2ut6qqoabfhj325wcjul` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table blog.articles: ~5 rows (approximately)
+-- Dumping data for table kras3eij_blog.articles: ~5 rows (approximately)
 /*!40000 ALTER TABLE `articles` DISABLE KEYS */;
 INSERT INTO `articles` (`id`, `author_id`, `title`, `content`, `dateAdded`) VALUES
 	(4, 1, 'Vestibulum ante ipsum.', 'Vivamus vel sagittis elit, ut convallis diam. In dignissim scelerisque ipsum, ac ultrices dui eleifend non. Mauris quis interdum lacus, lobortis sodales metus. Sed suscipit enim purus. Donec commodo, felis ac mollis dictum, risus elit aliquet urna, id sollicitudin augue turpis vitae ligula. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam et fermentum lorem. Phasellus mi metus, porttitor non odio vel, volutpat posuere tortor. Vestibulum ultricies nisi sed lacus posuere, sed cursus quam fermentum. Praesent ac enim faucibus, suscipit neque at, ultricies ante. Morbi sodales augue nec urna sodales, eu porta mauris interdum. Integer sit amet tincidunt nisi. Donec fermentum leo ligula, eget pellentesque lectus hendrerit blandit. Ut id erat ut metus egestas viverra quis ut velit. Vivamus at rutrum sem. Praesent mollis, lorem ut fermentum tincidunt, tellus erat consequat arcu, id fermentum est mauris quis arcu.\r\n\r\nMaecenas rutrum, dui ac aliquam hendrerit, odio turpis laoreet metus, sit amet egestas leo orci sit amet ante. Vivamus quis finibus tellus, a cursus libero. Sed sed enim consequat, tincidunt massa ut, feugiat massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi eros libero, viverra nec commodo ut, finibus in ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent tincidunt eget metus at faucibus. Suspendisse convallis, nibh vel tincidunt ultricies, erat lacus vehicula augue, nec bibendum massa justo vitae tellus. Ut arcu neque, euismod vitae nunc at, malesuada bibendum augue. In porta tincidunt dui eu auctor. Sed vel urna nec dui lobortis mattis. Fusce fermentum purus vel magna congue, pretium tempor odio suscipit. Etiam maximus, diam nec condimentum facilisis, nulla nulla sagittis magna, ut bibendum risus elit a felis. Praesent elit nisl, vehicula ac nibh ut, suscipit fringilla ipsum. Vivamus consequat diam maximus, pulvinar nunc a, rhoncus sem.', '2017-11-29 22:13:59'),
@@ -39,7 +59,7 @@ INSERT INTO `articles` (`id`, `author_id`, `title`, `content`, `dateAdded`) VALU
 	(9, 1, 'Cras volutpat a ligula eu vulputate', 'Vestibulum sed urna varius, facilisis diam non, porttitor nisi. Proin hendrerit enim metus, ac pharetra enim consequat ac. Nulla nisi ante, consectetur ac maximus sit amet, posuere sed tellus. Curabitur hendrerit justo in congue laoreet. Nam eget dui ac magna commodo lacinia finibus eu magna. Aliquam vestibulum, neque non sagittis egestas, sapien ante egestas magna, at tincidunt nibh odio id sapien. In molestie, orci ac vestibulum eleifend, lacus libero pellentesque lorem, ac maximus nisi massa vitae est. Suspendisse mollis nisl sit amet pulvinar pulvinar. Quisque nec lacinia lectus, eu tristique odio. Nam fringilla nisi nec turpis tincidunt consequat. Pellentesque convallis lacus nisi, nec sodales urna sagittis in. Fusce eros nisi, varius non vulputate et, iaculis at nisi.', '2018-04-16 23:15:49');
 /*!40000 ALTER TABLE `articles` ENABLE KEYS */;
 
--- Dumping structure for table blog.roles
+-- Dumping structure for table kras3eij_blog.roles
 CREATE TABLE IF NOT EXISTS `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -47,34 +67,14 @@ CREATE TABLE IF NOT EXISTS `roles` (
   UNIQUE KEY `UNIQ_B63E2EC75E237E06` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table blog.roles: ~2 rows (approximately)
+-- Dumping data for table kras3eij_blog.roles: ~2 rows (approximately)
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` (`id`, `name`) VALUES
 	(2, 'ROLE_ADMIN'),
 	(1, 'ROLE_USER');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 
--- Dumping structure for table blog.users
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `full_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UNIQ_1483A5E9E7927C74` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- Dumping data for table blog.users: ~7 rows (approximately)
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` (`id`, `email`, `password`, `full_name`) VALUES
-	(1, 'minka@abv.bg', '$2y$13$X/A4fCJzR4rnmqC5uV8qJOdrvLwqqXFjFe0Al.fgv3zoSi1zoZ1fe', 'Minka Dobreva'),
-	(2, 'gosho@abv.bg', '$2y$13$BNtuYFKPJ17ls7pycBE8PuC6/4L3N6S2NXframhx7ROPIskNQQ4A.', 'Gosho Goshov'),
-	(3, 'pesho@abv.bg', '$2y$13$IPTl9dGv4c4flUy1kw3e9O5MBykO.GmfM9KVXho7jCnC1pkp.VpRm', 'Pesho Petrov'),
-	(4, 'abv@gmail.bg', '$2y$13$U3WXtp/wBNLCzv.Wlhcl1eAwbHxu3pV5wQ4mfM.KwMfCDn08EXW4y', 'ABV ABV'),
-	(5, 'mmm@mm.mm', '$2y$13$OPk29O0he/TlkVTtJhF3uOLCqhIJY5nuzN4nUHjO6VT4jVX7Ah0OK', 'asas');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-
--- Dumping structure for table blog.users_roles
+-- Dumping structure for table kras3eij_blog.users_roles
 CREATE TABLE IF NOT EXISTS `users_roles` (
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `users_roles` (
   CONSTRAINT `FK_51498A8ED60322AC` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Dumping data for table blog.users_roles: ~7 rows (approximately)
+-- Dumping data for table kras3eij_blog.users_roles: ~7 rows (approximately)
 /*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
 INSERT INTO `users_roles` (`user_id`, `role_id`, `users_id`, `roles_id`) VALUES
 	(1, 1, 0, 0),
