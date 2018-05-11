@@ -1,4 +1,5 @@
 ### http://www.blog.krasimira-georgieva.com/
+To Login use email: pesho@abv.bg password: 123
 
 # Blog: PHP and Symfony
 
